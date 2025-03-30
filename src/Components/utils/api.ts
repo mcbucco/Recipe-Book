@@ -4,7 +4,7 @@ const API_BASE_URL = 'https://dummyjson.com/recipes';
 
 export const getAllRecipesApi = async (): Promise<TRecipe[]> => {
   try {
-    const response = await fetch(API_BASE_URL);
+    const response = await fetch(`${API_BASE_URL}?limit=0`);
     if (response.ok) {
       const data = await response.json();
       return data.recipes as TRecipe[];

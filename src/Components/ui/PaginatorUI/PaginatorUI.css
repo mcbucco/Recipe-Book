@@ -1,0 +1,18 @@
+.paginator {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  font-size: .8rem;
+}
+
+.paginator_page {
+  cursor: pointer;
+}
+
+.paginator_page__isActive {
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: underline;
+}

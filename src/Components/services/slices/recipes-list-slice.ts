@@ -11,12 +11,20 @@ type TRecipesListState = {
   recipes: TCardRecipe[];
   loadingError: string | null;
   loading: boolean;
+  viewSetup: {
+    currentPage: number | null;
+    pageSize: number;
+  };
 };
 
 const initialState: TRecipesListState = {
   recipes: [],
   loadingError: null,
   loading: false,
+  viewSetup: {
+    currentPage: 1,
+    pageSize: 10,
+  },
 };
 
 export const recipesListSlice = createSlice({
@@ -30,34 +38,33 @@ export const recipesListSlice = createSlice({
         isVisible: true,
       };
       console.log(newRecipe);
-      state.recipes = [
-        newRecipe,
-        ...state.recipes
-      ];
+      state.recipes = [newRecipe, ...state.recipes];
     },
-    resetFilters: (state) => state.recipes.forEach(recipe => recipe.isVisible = true),
+    resetFilters: (state) =>
+      state.recipes.forEach((recipe) => (recipe.isVisible = true)),
     filterRecipe: (state, action: PayloadAction<string>) => {
-      const [optionGroup, option] = action.payload.split('::');
-      if (optionGroup === '') {
+      const [optionGroup, option] = action.payload.split("::");
+      if (optionGroup === "") {
         recipesListSlice.caseReducers.resetFilters(state);
         return;
       }
-      if (optionGroup === 'isLiked') {
-        if (option === 'С лайком') {
-          state.recipes.forEach(recipe => {
-            if (recipe.isLiked) recipe.isVisible = true
-            else recipe.isVisible = false
+      if (optionGroup === "isLiked") {
+        if (option === "С лайком") {
+          state.recipes.forEach((recipe) => {
+            if (recipe.isLiked) recipe.isVisible = true;
+            else recipe.isVisible = false;
           });
-        } else state.recipes.forEach(recipe => {
-          if (recipe.isLiked) recipe.isVisible = false
-          else recipe.isVisible = true
-        }
-      );
-      }  else state.recipes.forEach(recipe => {
-        if (recipe[optionGroup as keyof TCardRecipe] !== option) {
-          recipe.isVisible = false
-        };
-      });
+        } else
+          state.recipes.forEach((recipe) => {
+            if (recipe.isLiked) recipe.isVisible = false;
+            else recipe.isVisible = true;
+          });
+      } else
+        state.recipes.forEach((recipe) => {
+          if (recipe[optionGroup as keyof TCardRecipe] !== option) {
+            recipe.isVisible = false;
+          }
+        });
     },
     deleteRecipe: (state, action: PayloadAction<number>) => {
       const updatedRecipes = state.recipes.filter(
@@ -66,12 +73,20 @@ export const recipesListSlice = createSlice({
       state.recipes = updatedRecipes;
     },
     likeRecipe: (state, action: PayloadAction<number>) => {
-      const recipeIndex = state.recipes.findIndex(recipe => recipe.id === action.payload);
+      const recipeIndex = state.recipes.findIndex(
+        (recipe) => recipe.id === action.payload
+      );
       state.recipes[recipeIndex].isLiked = !state.recipes[recipeIndex].isLiked;
+    },
+    setCurrentPage: (state, action: PayloadAction<number>) => {
+      state.viewSetup.currentPage = action.payload;
     },
   },
   selectors: {
     recipesSelector: (state) => state.recipes,
+    recipesCountSelector: (state) => state.recipes.length,
+    currentPageSelector: (state) => state.viewSetup.currentPage,
+    pageSizeSelector: (state) => state.viewSetup.pageSize,
   },
   extraReducers: (builder) => {
     builder
@@ -91,10 +106,22 @@ export const recipesListSlice = createSlice({
       )
       .addCase(getAllRecipes.rejected, (state) => {
         state.loading = false;
-        state.loadingError = 'Loading data error'
+        state.loadingError = "Loading data error";
       });
   },
 });
 
-export const { recipesSelector } = recipesListSlice.selectors;
-export const {  addRecipe, deleteRecipe, filterRecipe, likeRecipe, resetFilters } = recipesListSlice.actions;
+export const {
+  currentPageSelector,
+  pageSizeSelector,
+  recipesCountSelector,
+  recipesSelector,
+} = recipesListSlice.selectors;
+export const {
+  addRecipe,
+  deleteRecipe,
+  filterRecipe,
+  likeRecipe,
+  resetFilters,
+  setCurrentPage,
+} = recipesListSlice.actions;
