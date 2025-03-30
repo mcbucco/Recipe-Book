@@ -1,1 +1,1 @@
-export { default } from './AddRecipeButton'
+export { default } from './AddRecipeButton';
