@@ -1,0 +1,50 @@
+.card_details {
+  border: 2px solid #000;
+  padding: 1rem;
+}
+
+.card_details__name {
+  text-align: center;
+}
+
+.card_details__image {
+  margin: 1rem auto;
+  display: block;
+  block-size: 35%;
+  inline-size: 35%;
+  min-block-size: 200px;
+  min-inline-size: 200px;
+}
+
+.card_details__recipe {
+  text-align: start;
+}
+
+.card_details__ingredients,
+.card_details__instructions {
+  list-style-position: inside;
+}
+
+.card_details__ingredients_heading,
+.card_details__instructions_heading {
+  margin-block-start: 1rem;
+}
+
+.card_details__instructions {
+  text-align: start;
+  list-style-type: number;
+}
+
+.card_details__button {
+  display: block;
+  margin: auto;
+  padding: .5rem;
+  background-color: transparent;
+  border: 1px solid #000;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.card_details__button:hover {
+  box-shadow: 2px 2px 0 #000;
+}

@@ -1,0 +1,10 @@
+.add_recipe {
+  inline-size: 25%;
+  font-family: inherit;
+  display: block;
+  margin: 1rem auto;
+  padding: .5rem;
+  background-color: transparent;
+  border: 1px solid #000;
+  cursor: pointer;
+}

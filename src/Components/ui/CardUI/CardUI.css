@@ -1,0 +1,57 @@
+.card {
+  padding: 10px 10px 35px;
+  border: 2px solid #000;
+  background-color: #fff;
+  list-style-type: none;
+  inline-size: 280px;
+  block-size: 280px;
+}
+
+.card__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card__image {
+  display: block;
+  margin: auto;
+  block-size: 200px;
+  inline-size: 260px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.card__image:hover {
+  cursor: pointer;
+}
+
+.card__description__text {
+  display: block;
+  block-size: 40px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__like-button,
+.card__delete-button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.card__like-button:hover svg {
+  stroke: red;
+}
+
+.card__like-button_active svg {
+  stroke: red;
+}
+
+.card__delete-button {
+  float: right;
+}
+
+.card__delete-button:hover svg {
+  stroke: brown;
+}

@@ -1,0 +1,33 @@
+.form {
+  margin: auto;
+  inline-size: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__button {
+  inline-size: 25%;
+  block-size: 2.5em;
+  margin: auto;
+  margin-block-start: 1rem;
+  font-family: inherit;
+  border: 1px solid #000;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.form__button_submit:disabled {
+  border: 1px solid #808080;
+}
+
+.form__button_submit:not(:disabled):hover {
+  box-shadow: 2px 2px 0 #000;
+}
+
+.form__button_reset {
+  float: inline-end;
+}
+
+.form__button_reset:hover {
+  box-shadow: 2px 2px 0 #000; 
+}
